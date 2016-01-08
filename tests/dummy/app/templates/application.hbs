@@ -4,4 +4,12 @@
 <button onclick={{action "changeView" "agendaWeek"}}>Week</button>
 <button onclick={{action "changeView" "agendaDay"}}>Day</button>
 
-{{full-calendar viewName=viewName}}
+<ul>
+{{#each eventsArray as |event|}}
+  <li>{{event.title}} <button onclick={{action "removeEvent" event}}>x</button></li>
+{{/each}}
+</ul>
+
+{{input value=eventTitle}} <button onclick={{action "addEvent" event}}>Add</button>
+
+{{full-calendar viewName=viewName events=eventsArray}}
