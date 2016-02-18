@@ -23,12 +23,15 @@ let getEventsArray = () => {
 };
 
 moduleForComponent('full-calendar', 'Integration | Component | full calendar', {
-  integration: true
+  integration: true,
+  beforeEach() {
+    this.set('date', new Date(2016, 0, 10));
+  }
 });
 
 test('it renders', function(assert) {
 
-  this.render(hbs`{{full-calendar}}`);
+  this.render(hbs`{{full-calendar date=date}}`);
 
   assert.equal(this.$('.ember-view.full-calendar').length, 1);
 });
@@ -37,7 +40,7 @@ test('it renders events', function(assert) {
 
   this.set('eventsArray', getEventsArray());
 
-  this.render(hbs`{{full-calendar events=eventsArray}}`);
+  this.render(hbs`{{full-calendar date=date events=eventsArray}}`);
 
   assert.equal(this.$('.fc-title').length, 4);
   assert.equal(this.$('.fc-title').text().trim(), 'Event 1Event 2Event 3Event 4');
@@ -49,7 +52,7 @@ test('replacing events rerenders events', function(assert) {
 
   this.set('eventsArray', eventsArray);
 
-  this.render(hbs`{{full-calendar events=eventsArray}}`);
+  this.render(hbs`{{full-calendar date=date events=eventsArray}}`);
 
   assert.equal(this.$('.fc-title').length, 4);
   assert.equal(this.$('.fc-title').text().trim(), 'Event 1Event 2Event 3Event 4');
@@ -74,7 +77,7 @@ test('set events to null removes events', function(assert) {
 
   this.set('eventsArray', eventsArray);
 
-  this.render(hbs`{{full-calendar events=eventsArray}}`);
+  this.render(hbs`{{full-calendar date=date events=eventsArray}}`);
 
   assert.equal(this.$('.fc-title').length, 4);
   assert.equal(this.$('.fc-title').text().trim(), 'Event 1Event 2Event 3Event 4');
@@ -90,7 +93,7 @@ test('it removes events', function(assert) {
 
   this.set('eventsArray', eventsArray);
 
-  this.render(hbs`{{full-calendar events=eventsArray}}`);
+  this.render(hbs`{{full-calendar date=date events=eventsArray}}`);
 
   assert.equal(this.$('.fc-title').length, 4);
   assert.equal(this.$('.fc-title').text().trim(), 'Event 1Event 2Event 3Event 4');
@@ -108,7 +111,7 @@ test('it adds events', function(assert) {
 
   this.set('eventsArray', eventsArray);
 
-  this.render(hbs`{{full-calendar events=eventsArray}}`);
+  this.render(hbs`{{full-calendar date=date events=eventsArray}}`);
 
   assert.equal(this.$('.fc-title').length, 4);
   assert.equal(this.$('.fc-title').text().trim(), 'Event 1Event 2Event 3Event 4');
