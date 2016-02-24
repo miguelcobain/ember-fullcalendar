@@ -190,9 +190,7 @@ export default Ember.Component.extend(InvokeActionMixin, {
 
       // create an event handler that runs the function inside an event loop.
       actions[eventName] = (...args) => {
-        run(() => {
-          this.invokeAction(eventName, ...args, this.$());
-        });
+        this.invokeAction(eventName, ...args, this.$());
       };
     });
 
