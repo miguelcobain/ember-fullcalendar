@@ -3,6 +3,7 @@ import layout from '../templates/components/full-calendar';
 import { InvokeActionMixin } from 'ember-invoke-action';
 const { get, isArray, getProperties, observer, computed, run } = Ember;
 import getOwner from 'ember-getowner-polyfill';
+const assign = Ember.assign || Ember.merge;
 
 export default Ember.Component.extend(InvokeActionMixin, {
 
@@ -120,7 +121,7 @@ export default Ember.Component.extend(InvokeActionMixin, {
   didInsertElement() {
 
     let options =
-      Object.assign(
+      assign(
         this.get('options'),
         this.get('hooks')
       );
